@@ -1,0 +1,9 @@
+<h1>Perfil de Usuario</h1>
+<h1>Perfil</h1>
+<p><strong>Nombre:</strong> <%= current_user.name %></p>
+<p><strong>Email:</strong> <%= current_user.email %></p>
+<p><strong>Telefono:</strong> <%= current_user.telefono %></p>
+<p><strong>descripcion:</strong> <%= current_user.description %></p>
+<p><strong>imagen de perfil:</strong> <%= current_user.perfil_img %></p>
+<% if current_user.perfil_img.attached? %>
+  <p><strong>Imagen de perfil:</strong></p>

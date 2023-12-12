@@ -1,0 +1,20 @@
+<h2 class = "text-orange-400 font-bold flex flex-col text-xl items-center ">Crear chat</h2>
+
+<%= form_with(model: @chat, url: chats_path, method: :post) do |f| %>
+    <div class = "text-orange-400  font-bold flex flex-col items-center h-screen">
+            <% if current_user %>
+                <%= f.hidden_field :user1, value: current_user.id %>
+                <%= f.hidden_field :mensajes, value: ([[current_user.id,"hola soy #{current_user.name} y acabo de crear este chat"]]).to_json %>
+
+                <div class="field">
+                <%= f.label :user2, "Seleccionar un administrador con el que desea crear un chat" %>
+                <%= f.select :user2, options_for_select(User.where.not(admin_id: nil).pluck(:name, :id)) %>
+                </div>
+
+                <div class="actions  bg-orange-200 text-gray-600 mx-2 my-3 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300%">
+                <%= f.submit "Crear chat" %>
+                </div>
+            
+            <% end %>
+    </div>
+<% end %>

@@ -1,0 +1,32 @@
+<%= form_with model: @product do |form| %>
+
+   <% @product.errors.full_messages.each do |error|%>
+    <%= error%>
+   <% end%>
+   <%= form.label :title, class: "m-2 text-orange-400 "%>
+   <div class= "m-2">
+   
+   <%= form.text_field :title,class: "my-2 text-orange-400 rounded-2xl border-gray-400"%>
+   </div>
+   <%= form.label :description, class: "m-2 text-orange-400 "%>
+   <div class= "m-2">
+   
+   <%= form.text_field :description,class: "my-2 rounded-2xl border-gray-400 "%>
+   </div>
+   <%= form.label  :price, class: "m-2 text-orange-400 "%>
+   <div class= "m-2 text-orange-400 ">
+   <%= form.text_field :price,class: "my-2 rounded-2xl border-gray-400"%>
+   </div>
+   <%= form.label  :picture, class: "m-2 text-orange-400 "%>
+   <div class= "m-2 text-orange-400 ">
+
+   <%= form.file_field :picture%>
+   </div>
+   <%= form.label :Categoria, class: "m-2 text-orange-400 "%>
+   <div class= "m-2 ">
+   <%= form.collection_select :category_id, Category.all, :id, :tipo %>
+   </div>
+
+   <%= form.submit class: "bg-orange-200 text-gray-600 m-2  px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300"%>
+
+<%end%>

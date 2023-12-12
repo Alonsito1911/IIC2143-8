@@ -1,0 +1,29 @@
+<% if current_user%>
+    <% if current_user.admin_id == true%>
+
+    <%= link_to 'Ver solicitudes',  show_all_request_path, class: "text-orange-600 my-2  px-4 py-1 rounded-2xl drop-shadow-sm hover:bg-gray-300"%>
+    <%= link_to 'Agregar Producto',  new_product_path, class: "text-orange-600 my-2  px-4 py-1 rounded-2xl drop-shadow-sm hover:bg-gray-300 sm:my-4"%>
+    <%= link_to 'Agregar Etiqueta Producto',  new_category_path, class: "text-orange-600 my-2  px-4 py-1 rounded-2xl drop-shadow-sm hover:bg-gray-300 sm:my-4"%> 
+    <%end%>
+<%end%>
+
+<% if user_signed_in? %>
+    <div class = "lg:flex lg:items-center">
+    <p class=  "text-blue-500"> <%= link_to "Edit", edit_user_registration_path, class: "text-orange-600 my-2  px-4 py-1 rounded-2xl drop-shadow-sm hover:bg-gray-300"%></p>
+    <p class=  "text-red-500"><%= button_to "Sign out", destroy_user_session_path, class: "text-orange-600 my-2  px-4 py-1 rounded-2xl drop-shadow-sm hover:bg-gray-300", method: :delete %></p>
+    
+    <%= link_to "Perfil", user_path(current_user.id), class: "text-orange-600 my-2  px-4 py-1 rounded-2xl drop-shadow-sm hover:bg-gray-300" %>
+    <%= link_to "Chats", chats_path, class: "text-orange-600 my-3 px-4 py-1 rounded-2xl  mx-2 drop-shadow-sm hover:bg-gray-300" %>
+    </div>
+<% else %>
+<%= link_to "Sign in", new_user_session_path, class: "text-orange-600 my-2  px-4 py-1 rounded-2xl drop-shadow-sm hover:bg-gray-300" %>
+<%= link_to "Sign up", new_user_registration_path, class: "text-orange-600 my-2  px-4 py-1 rounded-2xl drop-shadow-sm hover:bg-gray-300" %>
+<% end %>
+
+<% if flash[:notice] %>
+<p class="notice"><%= flash[:notice] %></p>
+<% end %>
+
+<% if flash[:alert] %>
+<p class="alert"><%= flash[:alert] %></p>
+<% end %>

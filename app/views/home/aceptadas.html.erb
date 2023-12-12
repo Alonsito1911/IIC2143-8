@@ -1,0 +1,12 @@
+<h2 class = "text-orange-400 font-bold flex flex-col text-xl items-center ">Solicitudes Aceptadas</h2>
+<% @aceptado = true%>
+<% @rechazado = false%>
+
+<% @request.each do |request| %>
+    
+    <div class = "text-orange-200  flex flex-col items-center my-4">
+        <h2><%= request.id%>  <%= request.email%> <%= request.user_id%>  <%= request.product_id%>
+        </h2>
+    </div>
+
+<%end%>

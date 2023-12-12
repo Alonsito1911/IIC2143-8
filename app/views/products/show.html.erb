@@ -1,0 +1,71 @@
+<h1 class = 'title m-2 font-bold text-xl text-orange-400 mx-2'><%=@product.title%></h1> 
+
+
+
+ <% if current_user%>
+    <% if current_user.admin_id == true%>
+    <%= link_to 'Editar Producto', edit_product_path(@product),class: "bg-orange-200 m-2 text-gray-600 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300"%>    <%= link_to 'Eliminar Producto', product_path(@product), data: {turbo_method: :delete
+        },class: "bg-orange-200 text-gray-600 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300"%>
+        <%= link_to 'Solicitudes del Producto', index_request_path(@product),class: "m-2 bg-orange-200 text-gray-600 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300"%>
+    <%end%>
+<%end%>
+
+<%= link_to 'Solicitar Producto', requests_path(@product),class: "bg-orange-200 text-gray-600 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300"%>
+<%= link_to 'Reseñar Producto', reviews_path(@product),class: "bg-orange-200 text-gray-600 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300"%>
+
+<% ya_tiene_chat = false%>
+<% chat_existente = 1%>
+
+
+<% if current_user%>
+    <% @chatsExistentes.each do |chat| %>
+        <% if (chat.user1.to_i == @product.user_id.to_i || chat.user2.to_i == @product.user_id.to_i) && (chat.user1.to_i == current_user.id.to_i || chat.user2.to_i == current_user.id.to_i) %>
+        <% ya_tiene_chat = true %>
+        <% chat_existente = chat %>
+        <% end %>
+    <% end %>
+
+    <% if ya_tiene_chat == true && current_user.admin_id != true%>
+        <div>
+        <%= link_to "Ir a conversación con el administrador", inchat_chat_path(chat_existente) %>
+        </div>
+    <% end %>
+
+
+    <% if ya_tiene_chat == false && current_user.admin_id != true%>
+        <%= form_with(model: @chat, url: chats_path, method: :post) do |f| %>
+            <%= f.hidden_field :user1, value: current_user.id %>
+            <%= f.hidden_field :mensajes, value: ([[current_user.id,"hola soy #{current_user.name} y acabo de crear este chat"]]).to_json %>
+            <%= f.hidden_field :user2, value: @product.user_id %>
+            <div class="actions">
+            <%= f.submit "chatear con administrador" %>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>
+
+<div class = "bg-orange-200 mb-2 rounded-2xl m-2 my-3 flex">
+    <%= image_tag @product.picture, width: 500, class: "rounded-2xl m-2" if @product.picture.attached?%><p class = 'description m-2 font-bold text-xl mx-2'><%= @product.description%></p>
+    <span class = 'price m-2'><%=@product.price%></span>
+</div>
+
+<h1 class = "m-2 font-bold text-xl  text-orange-400 ">RESEÑAS </h1>
+
+<div class = "m-2">
+    <p><% @product.review.each do |review| %>
+    
+    <%= link_to show_reviews_path(@product, review), class: 'reseñas text-orange-400 bg-grey m-2 ' do %>
+        <h2><%= User.find(review.user_id).name%>: <%= review.description%> <p class = "text-orange-200"><%= link_to 'ver', show_reviews_path(@product, review)%><p> </h2>
+        <%end%>
+    <%end%>
+</div>
+
+
+
+
+
+
+
+
+
+

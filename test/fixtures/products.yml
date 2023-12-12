@@ -1,0 +1,16 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: NOKIA
+  description: duro de matar
+  price: 150
+
+  
+  
+
+two:
+  title: MyString
+  description: MyText
+  price: 1
+
+

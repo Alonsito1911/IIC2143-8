@@ -1,0 +1,15 @@
+<div class = "text-orange-400   flex flex-col items-center h-screen " >
+  <p><strong>Nombre:</strong> <%= current_user.name %></p>
+  <p><strong>Email:</strong> <%= current_user.email %></p>
+  <p><strong>Telefono:</strong> <%= current_user.telefono %></p>
+  <p><strong>descripcion:</strong> <%= current_user.description %></p>
+
+  <% if current_user.perfil_img.attached? %>
+    <p><strong>imagen de perfil:</strong> <%=image_tag current_user.perfil_img, width: 500  %></p>
+    
+  <% else %>
+    <p>No se ha adjuntado ninguna imagen de perfil.</p>
+  <% end %>
+
+  <%= link_to "Editar Perfil", edit_user_registration_path, class: "bg-orange-200 text-gray-600 mx-2 my-3 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300%" %>
+</div>

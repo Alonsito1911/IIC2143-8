@@ -1,0 +1,29 @@
+<h1>Editar reseña</h1>
+
+<%= form_with model: @request, url: request_path do |form| %>
+
+   <% @request.errors.full_messages.each do |error|%>
+    <%= error%>
+   <% end%>
+   <div>
+   <%= form.label :email%>
+   <%= form.text_field :email%>
+   <div>
+
+   <div>
+   <%= form.label :adress%>
+   <%= form.text_field :adress%>
+   <div>
+
+   <div>
+   <%= form.label  :amount%>
+   <%= form.number_field :amount%>
+   <div>
+   <div>
+   <%= form.label  :amount%>
+   <%=@request.product_id%>
+   <div>
+
+   <%= form.submit%>
+
+<%end%>

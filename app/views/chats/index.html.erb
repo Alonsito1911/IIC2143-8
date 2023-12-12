@@ -1,0 +1,21 @@
+<h1 class = "text-orange-400 font-bold flex flex-col text-xl items-center ">Mis Chats: </h1>
+<div class = "text-orange-400  flex flex-col text-xl items-center " >
+    <% tienechat = false %>
+    <% @chats.each do |chat| %>
+        <% if chat.user1.to_i == current_user.id.to_i || chat.user2.to_i == current_user.id.to_i %>
+          <% tienechat = true %>
+          <% if chat.user1.to_i == current_user.id.to_i %>
+            <% user = User.find(chat.user2) %>
+          <% elsif chat.user2.to_i == current_user.id.to_i %>
+            <% user = User.find(chat.user1) %>
+          <% end %>
+          <div>
+          <%= link_to "Chat con #{user.name}", inchat_chat_path(chat) %>
+          </div>
+        <% end %>
+    <% end %>
+    <% if tienechat == false %>
+      <p>No tienes ningún chat</p>
+    <% end %>
+    <%= link_to "Crear Chat", new_chat_path, class: "bg-orange-200 text-gray-600 mx-2 my-3 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300%" %>
+</div>

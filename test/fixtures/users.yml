@@ -1,0 +1,16 @@
+
+paco:
+  email: paco@vendelo.com
+  name: paco01
+  encrypted_password: 123456
+
+
+maria:
+  email: maria@vendelo.com
+  name: maria23
+  encrypted_password: 123456
+
+pepe:
+  email: pepe@vendelo.com
+  name: pepito
+  encrypted_password: 123456

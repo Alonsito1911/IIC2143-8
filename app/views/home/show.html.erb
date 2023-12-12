@@ -1,0 +1,14 @@
+<h2 class = "text-orange-400 font-bold flex flex-col text-xl items-center ">Solicitudes por aceptar</h2>
+<% @aceptado = true%>
+<% @rechazado = false%>
+
+<% @request.each do |request| %>
+    
+    <div class = "text-orange-200  flex flex-col items-center my-4">
+        <h2><%= request.id%>  <%= request.email%> <%= request.user_id%>  <%= request.product_id%>
+        <%= link_to "Aceptar", aceptar_request_path(Product.find(request.product_id),request ), class: " bg-orange-200 text-gray-600 mx-2 my-3 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300%" %>
+        </h2>
+    </div>
+
+<%end%>
+<%= link_to "Solicitudes Aceptadas", aceptadas_request_path, class: " bg-orange-200 text-gray-600 mx-2 my-3 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300%" %>

@@ -1,0 +1,37 @@
+<div class = "text-orange-400  flex flex-col text-xl items-center">
+  <% not_current = '' %>
+  <% if @chat.user1.to_i == current_user.id.to_i%>
+    <% not_current =  @chat.user2%>
+  <% else %>
+    <% not_current =  @chat.user1%>
+  <% end %>
+  <h2>Chat con <%= User.find(not_current).name %>: </h2>
+  <%mensajeslist = JSON.parse(@chat.mensajes) %>
+  <div class='contenedor_mensajes>
+  <% mensajeslist.each do |msg| %>
+    <% if msg[0].to_i == current_user.id.to_i%>
+    <p class = 'mensajes_current_user'> <strong><%= current_user.name%></strong>: <%= msg[1] %></p>
+    <% else %>
+    <p class = 'mensajes_not_current_user'> <strong><%= User.find(msg[0]).name%></strong>: <%= msg[1] %></p>
+    <% end %>
+  <% end %>
+  </div>
+  <div class = 'contenedor_enviar'>
+  <%= form_for @chat, url: update_chat_path(@chat), method: :patch do |f| %>
+      <%= f.hidden_field :user1, value: current_user.id %>
+      <%= f.hidden_field :user2, value: @chat.id %>
+      <div class="field">
+      <div>
+        <%= f.label :mensajes, "escriba su mensaje:" %>
+      </div>
+      <div>
+        <%= f.text_area :mensajes, value: '' %>
+      </div>
+      </div>
+      <div class="actions bg-orange-200 text-gray-600 mx-2 my-3 px-4 py-2 rounded-2xl drop-shadow-sm hover:bg-gray-300%">
+        <%= f.submit 'Enviar', onclick: "console.log('user1:', this.form.elements['chat[user1]'].value, 'user2:', this.form.elements['chat[user2]'].value, 'mensajes:', this.form.elements['chat[mensajes]'].value);" %>
+        <!--%= f.submit 'Enviar' %-->
+      </div>
+    <% end %>
+    </div>
+</div>

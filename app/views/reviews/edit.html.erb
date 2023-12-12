@@ -1,0 +1,15 @@
+<h1>Editar reseña</h1>
+
+<%= form_with model: @review, url: update_review_path do |form| %>
+
+   <% @review.errors.full_messages.each do |error|%>
+    <%= error%>
+   <% end%>
+   <div>
+   <%= form.label :description%>
+   <%= form.text_field :description%>
+   <div>
+
+   <%= form.submit%>
+
+<%end%>

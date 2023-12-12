@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h1 class = "text-orange-400 text-2xl m-3 font-bold">Solicitudes</h1>
+<% @product.request.each do |request| %>
+    
+  <%= link_to show_requests_path(@product, request.id) do %>
+    <div class = "text-orange-200 m-3 ">
+    
+      <h2> <%=User.where(id: request.user_id) %></h2>
+      <h2><%= request.amount %></h2>
+      <span><%=request.email%></span>
+      <h2><%= request.adress %></h2>
+    </div>
+  <%end%>
+    
+
+<%end%>
+

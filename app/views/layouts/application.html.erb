@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>COMPRA Y VENTA</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  
+  <body class="bg-neutral-900">
+    <div class = "bg-neutral-900 flex justify-between items-center  text-center px-2 " data-controller="menu">
+    
+        <%= link_to root_path do%>
+            <h1 class="text-2xl text-center font-bold text-orange-400 justify-center " >LA PIZZERIA DCC</h1>
+        <% end %>
+      <button class = "sm:hidden" data-action = "click->menu#open"><%= image_tag 'icons/menu.svg', width: 25, height:25%></button>
+      <div class = "hidden sm:block">
+        <%=render partial: 'shared/items'%>
+      </div>
+    
+    
+      <div class = "sm:hidden absolute bg-neutral-800 top-0 right-0 shadow z-10 h-full flex flex-col min-w-[35%] overflow-y-scroll ease-in-out duration-200 p-5 translate-x-full" data-menu-target = "items">
+        <button data-action = "click->menu#close"><%= image_tag 'icons/close.svg', width: 25, height:25%></button>        
+        <%=render partial: 'shared/items'%>
+      </div>
+    </div>
+
+    <div >
+    
+      <%= yield %>
+    </div>
+    
+  </body>
+  
+</html>
